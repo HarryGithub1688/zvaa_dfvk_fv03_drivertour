@@ -136,6 +136,13 @@
             "filterSettings": {
               "dateSettings": {
                 "useDateRange": true
+              },
+              "fields": {
+                "DeliveryDate": {
+                  "defaultValue": {
+                    "operation": "TODAY"
+                  }
+                }
               }
             },
             "tableSettings": {
