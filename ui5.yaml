@@ -20,6 +20,7 @@ server:
             url: http://fes-dev.harry.de:443
             client: '010'
             destination: FES_NO_AUTH
+            authenticationType: NoAuthentication
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

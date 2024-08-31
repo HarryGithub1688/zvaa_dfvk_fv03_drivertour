@@ -33,6 +33,7 @@ server:
             url: http://fes-dev.harry.de:443
             client: '010'
             destination: FES_NO_AUTH
+            authenticationType: NoAuthentication
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:
