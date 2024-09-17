@@ -82,7 +82,8 @@
         "FIORI_TOOLS_URL_PARAMS": "sap-client=010&sap-ui-xx-viewCache=false",
         "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/zvaadfvk00002\"}"
       }
-    } ],
+    }
+  ],
   "compounds": [],
   "version": "0.2.0"
 }

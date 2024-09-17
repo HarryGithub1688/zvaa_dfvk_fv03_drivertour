@@ -1,0 +1,4 @@
+
+.sapUiCalItem.sapUiCalItemNow:before {
+    border: none !important;
+}
