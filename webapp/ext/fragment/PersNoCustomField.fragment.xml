@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Input id="customPersNoInput" placeholder="" width="100%" showSuggestion="true" showValueHelp="true" suggestionRows="{/ZVR_VAA_DFVK_DRIVER}">
+			<suggestionColumns width="30cm">
+				<Column>
+					<Label text="PersNo"/>
+				</Column>
+				<Column>
+					<Label text="Title"/>
+				</Column>
+				<Column >
+					<Label text="FirstName"/>
+				</Column>
+				<Column >
+					<Label text="LastName"/>
+				</Column>
+				<Column >
+					<Label text=""/>
+				</Column>
+				<Column >
+					<Label text="UserId"/>
+				</Column>
+			</suggestionColumns>
+
+			<suggestionRows>
+				<ColumnListItem>
+					<Label text="{PersNo}"/>
+					<Label text="{Title}"/>
+					<Label text="{FirstName}"/>
+					<Label text="{LastName}"/>
+					<Label text="{FullName}"/>
+					<Label text="{UserId}"/>
+				</ColumnListItem>
+			</suggestionRows>
+		</Input>
+</core:FragmentDefinition>
