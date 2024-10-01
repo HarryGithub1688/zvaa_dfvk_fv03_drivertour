@@ -8,8 +8,8 @@ sap.ui.define([], function () {
 		},
 
 		newFilterDate: function () {
-			var listReport = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ListReport.view.ListReport::DriverTour--listReport");
-			var listReportFilter = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ListReport.view.ListReport::DriverTour--listReportFilter");
+			var listReport = this.getView().byId("listReport");
+			var listReportFilter = this.getView().byId("listReportFilter");
 			var dateFilter = this.getView().byId("listReportFilter-filterItemControl_BASIC-DeliveryDate");
 
 			if (new Date().getHours() > 19) {

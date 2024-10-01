@@ -22,10 +22,31 @@
                 <!-- <Annotation Term="Common.FieldControl"/> -->
             </Annotations>
 
+            <!-- 
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.DriverTourType/PersNo">
+
+                <Annotation Term="Common.Label" String="{@i18n&gt;FVK-Nr}"/>
+
+                <Annotation Term="com.sap.vocabularies.Common.v1.Text" Path="FullName">
+                    <Annotation Term="com.sap.vocabularies.UI.v1.TextArrangement" EnumMember="com.sap.vocabularies.UI.v1.TextArrangementType/TextLast"/>
+                </Annotation>
+
+            </Annotations>
+
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.ZVR_VAA_DFVK_DRIVERType/PersNo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+
+                <Annotation Term="Common.Label" String="{@i18n&gt;FVK-Nr}"/>
+
+                <Annotation Term="com.sap.vocabularies.Common.v1.Text" Path="FullName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast"/>
+                </Annotation>
+
+            </Annotations> 
+            -->
+
             <!--/field properties end/-->
 
             <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.DriverTourType">
-
                 <!-- <Annotation Term="UI.FieldGroup" Qualifier="PERN">
                     <Record Type="UI.FieldGroupType">
                         <PropertyValue Property="Data">
@@ -48,8 +69,8 @@
                         </Record>
                     </Collection>
                 </Annotation> -->
-                
             </Annotations>
+
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>

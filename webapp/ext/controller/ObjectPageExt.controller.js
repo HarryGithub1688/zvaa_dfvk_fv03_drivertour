@@ -4,8 +4,8 @@ sap.ui.define([], function () {
         globalCheck: false,
 		
 		onInit: function () {
-            //this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field").setTextLabel(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("FVK-Nr"));
-            this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::GroupElement").setLabel(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("FVK-Nr"));
+            //this.getView().byId("UserTourIdentification::PersNo::Field").setTextLabel(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("FVK-Nr"));
+            this.getView().byId("UserTourIdentification::PersNo::GroupElement").setLabel(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("FVK-Nr"));
         },
 		
 		onAfterRendering: function () {
@@ -15,16 +15,16 @@ sap.ui.define([], function () {
 
         //cambios LFM// agregamos el nombre completo segun el modelo al campo PersNo al editarlo -> replace the smartfield for custom input
         customFilterObjectPagePersNo: function () {
-            var oForm = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::Form");
+            var oForm = this.getView().byId("UserTourIdentification::Form");
             oForm.attachEditToggled(function (evn) {
                 setTimeout(function (evn) {
 
-                    var oForm = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::Form");
-                    var formGroup = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::FormGroup");
-                    var persNoGroupElm = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::GroupElement");
-                    var persNoField = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field");
-                    var persNoLabel = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field-label");
-                    var persNoInput = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field-input");
+                    var oForm = this.getView().byId("UserTourIdentification::Form");
+                    var formGroup = this.getView().byId("UserTourIdentification::FormGroup");
+                    var persNoGroupElm = this.getView().byId("UserTourIdentification::PersNo::GroupElement");
+                    var persNoField = this.getView().byId("UserTourIdentification::PersNo::Field");
+                    var persNoLabel = this.getView().byId("UserTourIdentification::PersNo::Field-label");
+                    var persNoInput = this.getView().byId("UserTourIdentification::PersNo::Field-input");
 
                     //persNoLabel.setText(this.getView().getModel("i18n").getProperty("FVK-Nr"));
                     
@@ -46,21 +46,28 @@ sap.ui.define([], function () {
                     customPersNoGroupElm.setLabel(persNoLabel.getText());
                     customPersNoInput.setValue(persNoField.getValue());
 
+                    /* customPersNoInput.attachChange(function (evn) {
+                        debugger
+                    }.bind(this)); */
+
                     customPersNoInput.attachValueHelpRequest(function (evn) {
                         persNoInput.fireValueHelpRequest();
 
                         setTimeout(function (evn) {
 
-                            var valueHelpDialog = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field-input-valueHelpDialog");
+                            var valueHelpDialog = this.getView().byId("UserTourIdentification::PersNo::Field-input-valueHelpDialog");
                             valueHelpDialog.attachBeforeClose(function (evn) {
 
-                                var oTable = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field-input-valueHelpDialog-table");
+                                var oTable = this.getView().byId("UserTourIdentification::PersNo::Field-input-valueHelpDialog-table");
                                 var index = oTable.getSelectedIndex();
                                 if (index >= 0) {
                                     var selectedRowPath = oTable.getRows()[index].getBindingContext().sPath;
                                     var selectedValue = this.getView().getModel().getProperty(selectedRowPath);
                                     var formatValue = selectedValue.FullName + " (" + selectedValue.PersNo + ")";
+                                    var deepPath = this.getView().byId("UserTourIdentification::Form").getBindingContext().sPath;
                                     customPersNoInput.setValue(formatValue);
+                                    this.getView().getModel().setProperty(deepPath + "/PersNo", selectedValue.PersNo);
+                                    this.getView().getModel().setProperty(deepPath + "/FullName", selectedValue.FullName);
                                 }
 
                             }.bind(this));
@@ -77,8 +84,11 @@ sap.ui.define([], function () {
                         var selectedRowPath = evn.mParameters.selectedRow.getBindingContext().sPath;
                         var selectedValue = this.getView().getModel().getProperty(selectedRowPath);
                         var formatValue = selectedValue.FullName + " (" + selectedValue.PersNo + ")";
+                        var deepPath = this.getView().byId("UserTourIdentification::Form").getBindingContext().sPath;
                         customPersNoInput.setValue(formatValue);
                         persNoInput.setValue(selectedValue.PersNo);
+                        this.getView().getModel().setProperty(deepPath + "/PersNo", selectedValue.PersNo);
+                        this.getView().getModel().setProperty(deepPath + "/FullName", selectedValue.FullName);
                     }.bind(this));
 
                     if (oForm.getEditable()) {
@@ -89,6 +99,33 @@ sap.ui.define([], function () {
                         persNoGroupElm.setVisible(true);
                         customPersNoGroupElm.setVisible(false);
                     }
+
+                    this.getView().byId("save").attachPress(function (evn) {
+                        this.getView().getModel().read("/ZVR_VAA_DFVK_DRIVER", {
+                            success: function (data) {
+                                var deepPath = this.getView().byId("UserTourIdentification::Form").getBindingContext().sPath;
+                                var checkValue = true;
+                                for (var i = 0; i < data.results.length; i++) {
+                                    var formatValue = data.results[i].FullName + " (" + data.results[i].PersNo + ")";
+                                    if (customPersNoInput.getValue() === formatValue) {
+                                        persNoInput.setValue(customPersNoInput.getValue());
+                                        checkValue = false;
+                                        break;
+                                    }
+                                }
+
+                                if (checkValue) {
+                                    persNoInput.setValue("");
+                                    customPersNoInput.setValue("");
+                                    this.getView().getModel().setProperty(deepPath + "/PersNo", "");
+                                    this.getView().getModel().setProperty(deepPath + "/FullName", "");
+                                }
+                            }.bind(this),
+                            error: function (error) {
+                                console.log(error);
+                            }.bind(this)
+                        });
+                    }.bind(this));
 
                 }.bind(this), 500);
             }.bind(this));
@@ -102,7 +139,7 @@ sap.ui.define([], function () {
 
 customFilterObjectPagePersNo1: function () {
 
-    var persNoField = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field");
+    var persNoField = this.getView().byId("UserTourIdentification::PersNo::Field");
     persNoField.attachChange(function (evn) {
         var oSource = evn.getSource();
         var oValue = oSource.getValue();
@@ -131,7 +168,7 @@ customFilterObjectPagePersNo1: function () {
 
     }.bind(this));
 
-    var saveBtn = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--save");
+    var saveBtn = this.getView().byId("save");
         saveBtn.attachPress(function (evn) {
 
             var oModel = evn.getSource().getModel();
@@ -151,12 +188,12 @@ customFilterObjectPagePersNo1: function () {
 }
 
 customFilterObjectPagePersNo2: function () {
-    var editBtn = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--edit");
+    var editBtn = this.getView().byId("edit");
     editBtn.attachPress(function (evn) {
         var changePersNoFormatFun = function () {
-            var persNoInput = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field-input");
+            var persNoInput = this.getView().byId("UserTourIdentification::PersNo::Field-input");
             persNoInput.attachChange(function (evn) {
-                var persNoField = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field");
+                var persNoField = this.getView().byId("UserTourIdentification::PersNo::Field");
                 var originalValue = persNoField.getValue();
                 this.globalVar = originalValue;
                 var fullName = persNoField.getModel().getProperty("/ZVR_VAA_DFVK_DRIVER('" + originalValue + "')/FullName");
@@ -181,7 +218,7 @@ customFilterObjectPagePersNo2: function () {
                 }
             }.bind(this));
 
-            var saveBtn = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--save");
+            var saveBtn = this.getView().byId("save");
             saveBtn.attachPress(function (evn) {
                 if (this.globalCheck === true) {
                     var oModel = evn.getSource().getModel();
@@ -189,7 +226,7 @@ customFilterObjectPagePersNo2: function () {
 
                     oModel.attachRequestSent(function (evn) {
                         if (this.globalCheck === true) {
-                            var persNoField = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field");
+                            var persNoField = this.getView().byId("UserTourIdentification::PersNo::Field");
                             var fullName = evn.getSource().getProperty("/ZVR_VAA_DFVK_DRIVER('" + this.globalVar + "')/FullName");
                             var newValue = '' + fullName + ' (' + this.globalVar + ')';
                             persNoField.setValue(newValue);
@@ -198,9 +235,10 @@ customFilterObjectPagePersNo2: function () {
                 }
             }.bind(this));
         }.bind(this);
+
         //check function every 0,5 seconds until find the requested data
         var doThisWhenThisInfiniteLoopCheck = function () {
-            var persNoInput = this.getView().byId("hab.zvaadfvk00002::sap.suite.ui.generic.template.ObjectPage.view.Details::DriverTour--UserTourIdentification::PersNo::Field-input");
+            var persNoInput = this.getView().byId("UserTourIdentification::PersNo::Field-input");
             if (persNoInput === undefined) {
                 setTimeout(function () {
                     doThisWhenThisInfiniteLoopCheck();
