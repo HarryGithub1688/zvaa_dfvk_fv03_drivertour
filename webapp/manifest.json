@@ -63,7 +63,7 @@
     "sap.ui5": {
         "flexEnabled": true,
         "dependencies": {
-            "minUI5Version": "1.108.19",
+            "minUI5Version": "1.102.2",
             "libs": {
                 "sap.m": {},
                 "sap.ui.core": {},
@@ -116,7 +116,11 @@
             }
         },
         "resources": {
-            "css": [{"uri": "css/style.css"}]
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
         },
         "routing": {
             "config": {},
