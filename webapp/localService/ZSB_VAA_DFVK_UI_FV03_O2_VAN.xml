@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-    <edmx:Reference Uri="/sap/opu/odata/sap/ZSB_VAA_DFVK_UI_FV03_O2/$metadata">
-        <edmx:Include Namespace="cds_zsd_vaa_dfvk_ui_fv03"/>
-    </edmx:Reference>
     <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='ERP_010')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
     </edmx:Reference>
@@ -23,6 +20,9 @@
     </edmx:Reference>
     <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='ERP_010')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../../sap/zsb_vaa_dfvk_ui_fv03_o2/$metadata">
+        <edmx:Include Namespace="ZSB_VAA_DFVK_UI_FV03_O2" Alias="SAP"/>
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="zsb_vaa_dfvk_ui_fv03_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">

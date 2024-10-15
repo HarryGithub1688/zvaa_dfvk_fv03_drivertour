@@ -11,8 +11,8 @@ sap.ui.define([], function () {
 		newFilterDate: function () {
 			var listReport = this.getView().byId("listReport");
 			var listReportFilter = this.getView().byId("listReportFilter");
-
-			listReport.attachEventOnce("dataReceived", function (evn) {
+			
+			listReport.attachEventOnce("beforeRebindTable", function (evn) {
 				var dateFilter = this.getView().byId("listReportFilter-filterItemControl_BASIC-DeliveryDate");
 				if (new Date().getHours() > 19) {
 					var today = new Date();
@@ -23,7 +23,9 @@ sap.ui.define([], function () {
 				var formatValue = today.toDateString().split(" ")[1] + " " + today.toDateString().split(" ")[2] + ", " + today.toDateString().split(" ")[3];
 
 				listReportFilter.getControlByKey("DeliveryDate").setValue(formatValue);
-				listReportFilter.fireSearch();
+				setTimeout(function () {
+					listReportFilter.fireSearch();
+				}.bind(this), 100);
 				
 				listReportFilter.getControlByKey("DeliveryDate").attachAfterValueHelpOpen(function (evn) {
 					evn.getSource()._getCalendar().setIntervalSelection(false);
@@ -34,14 +36,27 @@ sap.ui.define([], function () {
 						listReportFilter.setFilterData({"DeliveryDate": {value: value}});
 					}.bind(this))
 				}.bind(this));
-
 			}.bind(this));
+
+			setTimeout(function () {
+				listReport.rebindTable();
+			}.bind(this), 100);
 		}
 
 	});
 });
 
 /*
+
+
+initialise
+: 
+(2) [{…}, {…}]
+uiStateChange
+: 
+[{…}]
+_change
+
 listReportFilter.attachInitialized(function (evn) {
 	var dateFilter = this.getView().byId("listReportFilter-filterItemControl_BASIC-DeliveryDate");
 
