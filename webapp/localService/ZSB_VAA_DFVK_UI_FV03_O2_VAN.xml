@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/sap/ZSB_VAA_DFVK_UI_FV03_O2/$metadata">
+        <edmx:Include Namespace="cds_zsd_vaa_dfvk_ui_fv03"/>
+    </edmx:Reference>
     <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='ERP_010')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
     </edmx:Reference>
@@ -21,26 +24,8 @@
     <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='ERP_010')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
     </edmx:Reference>
-    <edmx:Reference Uri="../../../sap/zsb_vaa_dfvk_ui_fv03_o2/$metadata">
-        <edmx:Include Namespace="ZSB_VAA_DFVK_UI_FV03_O2" Alias="SAP"/>
-    </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="zsb_vaa_dfvk_ui_fv03_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.I_BusinessPartnerCustomerVHType/BusinessPartnerName">
-                <Annotation Term="UI.HiddenFilter"/>
-            </Annotations>
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.I_BusinessPartnerCustomerVHType/BusinessPartnerUUID">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.I_BusinessPartnerCustomerVHType/FormOfAddress">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.I_BusinessPartnerCustomerVHType/AuthorizationGroup">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.I_BusinessPartnerCustomerVHType/IsActiveEntity">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
             <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.I_DraftAdministrativeDataType/DraftUUID">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
@@ -83,6 +68,12 @@
             <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerMessageType/BusinessPartnerName">
                 <Annotation Term="UI.HiddenFilter"/>
                 <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerMessageType/BusinessPname">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerMessageType/headerDescription">
+                <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerMessageType/HasDraftEntity">
                 <Annotation Term="UI.HiddenFilter"/>
@@ -178,7 +169,7 @@
                         <PropertyValue Property="Data">
                             <Collection>
                                 <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="MessageTitel"/>
+                                    <PropertyValue Property="Value" Path="MessageTitle"/>
                                 </Record>
                                 <Record Type="UI.DataField">
                                     <PropertyValue Property="Value" Path="MessageText"/>
@@ -190,13 +181,23 @@
                 <Annotation Term="UI.HeaderInfo">
                     <Record>
                         <PropertyValue Property="TypeName" String="Kurznachricht"/>
-                        <PropertyValue Property="TypeNamePlural" String="Kurznachrichten"/>
+                        <PropertyValue Property="TypeNamePlural" String="Kundennachricht"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="headerTitle"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="headerDescription"/>
+                            </Record>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="UI.Identification">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="MessageTitel"/>
+                            <PropertyValue Property="Value" Path="MessageTitle"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CustomerId"/>
@@ -227,7 +228,7 @@
                 <Annotation Term="UI.LineItem">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="MessageTitel"/>
+                            <PropertyValue Property="Value" Path="MessageTitle"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CustomerId"/>
@@ -257,9 +258,7 @@
                 </Annotation>
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
-                        <PropertyPath>MessageTitel</PropertyPath>
                         <PropertyPath>CustomerId</PropertyPath>
-                        <PropertyPath>MessageText</PropertyPath>
                         <PropertyPath>ValidFrom</PropertyPath>
                         <PropertyPath>ValidTo</PropertyPath>
                         <PropertyPath>CreatedBy</PropertyPath>
@@ -268,6 +267,12 @@
                         <PropertyPath>LastChangedAt</PropertyPath>
                     </Collection>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerTourMapType/SourceName">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerTourMapType/TargetName">
+                <Annotation Term="UI.Hidden"/>
             </Annotations>
             <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerTourMapType">
                 <Annotation Term="UI.Facets">
@@ -283,7 +288,7 @@
                             <PropertyValue Property="Target" AnnotationPath="to_CustomersTourSource/@UI.LineItem"/>
                         </Record>
                         <Record Type="UI.ReferenceFacet">
-                            <PropertyValue Property="Label" String="KundenTourZiel"/>
+                            <PropertyValue Property="Label" String="Kunden Ziel-Tour"/>
                             <PropertyValue Property="ID" String="CustomerTourTarget"/>
                             <PropertyValue Property="Target" AnnotationPath="to_CustomersTourTarget/@UI.LineItem"/>
                         </Record>
@@ -295,6 +300,11 @@
                         <PropertyValue Property="TypeNamePlural" String="Kunden/Tour Zuordnung"/>
                         <PropertyValue Property="Title">
                             <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="TourInfo"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
                                 <PropertyValue Property="Value" Path="SourceTourDate"/>
                             </Record>
                         </PropertyValue>
@@ -303,40 +313,26 @@
                 <Annotation Term="UI.Identification">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Datum der Tour"/>
+                            <PropertyValue Property="Value" Path="SourceTourId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TargetTourId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="SourceTourDate"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Name der Ausgangstour"/>
-                            <PropertyValue Property="Value" Path="SourceName"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Name der Zieltour"/>
-                            <PropertyValue Property="Value" Path="TargettName"/>
                         </Record>
                     </Collection>
                 </Annotation>
                 <Annotation Term="UI.LineItem">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Datum der Tour"/>
                             <PropertyValue Property="Value" Path="SourceTourDate"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Name der Ausgangstour"/>
-                            <PropertyValue Property="Value" Path="SourceName"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Name der Zieltour"/>
-                            <PropertyValue Property="Value" Path="TargettName"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="SourceTourId"/>
                             <PropertyValue Property="Value" Path="SourceTourId"/>
                             <Annotation Term="UI.Hidden"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="TargetId"/>
                             <PropertyValue Property="Value" Path="TargetTourId"/>
                             <Annotation Term="UI.Hidden"/>
                         </Record>
@@ -345,12 +341,13 @@
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
                         <PropertyPath>SourceTourDate</PropertyPath>
-                        <PropertyPath>SourceName</PropertyPath>
-                        <PropertyPath>TargettName</PropertyPath>
                         <PropertyPath>SourceTourId</PropertyPath>
                         <PropertyPath>TargetTourId</PropertyPath>
                     </Collection>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerTourSourceType/DeliveryDate">
+                <Annotation Term="UI.Hidden"/>
             </Annotations>
             <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerTourSourceType/MoveToTarget_ac">
                 <Annotation Term="UI.Hidden"/>
@@ -359,19 +356,13 @@
                 <Annotation Term="UI.Identification">
                     <Collection>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TourId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CustomerId"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="DeliveryDate"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="TourId"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NameOrg1"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NameOrg2"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Location1"/>
@@ -395,7 +386,7 @@
                             <PropertyValue Property="Value" Path="SequenceNumber"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="TagetTourId"/>
+                            <PropertyValue Property="Value" Path="TargetTourId"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -407,16 +398,10 @@
                             <PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/Isolated"/>
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CustomerId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="DeliveryDate"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="TourId"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NameOrg1"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NameOrg2"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Location1"/>
@@ -440,7 +425,8 @@
                             <PropertyValue Property="Value" Path="SequenceNumber"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="TagetTourId"/>
+                            <PropertyValue Property="Value" Path="TargetTourId"/>
+                            <Annotation Term="UI.Hidden"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -449,31 +435,22 @@
                         <Record Type="UI.DataFieldForAction">
                             <PropertyValue Property="Label" String="MoveToTarget"/>
                             <PropertyValue Property="Action" String="cds_zsd_vaa_dfvk_ui_fv03.cds_zsd_vaa_dfvk_ui_fv03_Entities/MoveToTarget"/>
-                            <PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/Isolated"/>
+                            <PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/ChangeSet"/>
                         </Record>
                     </Collection>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerTourTargetType/MoveToSource_ac">
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomersTourTargetType/MoveToSource_ac">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomerTourTargetType">
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.CustomersTourTargetType">
                 <Annotation Term="UI.Identification">
                     <Collection>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TargetTourId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CustomerId"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="DeliveryDate"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="TourId"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NameOrg1"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NameOrg2"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Location1"/>
@@ -506,16 +483,7 @@
                             <PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/Isolated"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="DeliveryDate"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="TourId"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NameOrg1"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NameOrg2"/>
+                            <PropertyValue Property="Value" Path="CustomerId"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Location1"/>
@@ -537,6 +505,15 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="SequenceNumber"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.StatusInfo" Qualifier="SI">
+                    <Collection>
+                        <Record Type="UI.DataFieldForAction">
+                            <PropertyValue Property="Label" String="MoveToSource"/>
+                            <PropertyValue Property="Action" String="cds_zsd_vaa_dfvk_ui_fv03.cds_zsd_vaa_dfvk_ui_fv03_Entities/MoveToSource"/>
+                            <PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/Isolated"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -669,6 +646,369 @@
                     </Collection>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMonitorType">
+                <Annotation Term="UI.DataPoint" Qualifier="Fertigstellung">
+                    <Record>
+                        <PropertyValue Property="Value" Path="Fertigstellung"/>
+                        <PropertyValue Property="Title" String=""/>
+                        <PropertyValue Property="TargetValue" Decimal="100"/>
+                        <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Progress"/>
+                        <PropertyValue Property="Criticality" Path="Status"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Kunden"/>
+                            <PropertyValue Property="ID" String="TourMonitorCustomer"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_CustomersTour/@UI.LineItem"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Nachrichten"/>
+                            <PropertyValue Property="ID" String="TourMonitorMessage"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_TourMessage/@UI.LineItem"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Tour Monitor"/>
+                        <PropertyValue Property="TypeNamePlural" String="Tours Monitor"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="TourInfo"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="TourDiliveryInfo"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TourId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DeliveryDate"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TourId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Fertigstellung %"/>
+                            <PropertyValue Property="Criticality" Path="Status"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember="UI.CriticalityRepresentationType/WithoutIcon"/>
+                            <PropertyValue Property="Value" Path="FertigstellungP"/>
+                        </Record>
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Label" String="Fertigstellung"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Fertigstellung"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="35rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Paletten"/>
+                            <PropertyValue Property="Value" Path="Paletten"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Kunststoffkisten"/>
+                            <PropertyValue Property="Value" Path="Kunststoffkisten"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Lieferdatum"/>
+                            <PropertyValue Property="Value" Path="DeliveryDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="PlantId"/>
+                            <Annotation Term="UI.Hidden"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>DeliveryDate</PropertyPath>
+                        <PropertyPath>TourId</PropertyPath>
+                        <PropertyPath>PlantId</PropertyPath>
+                        <PropertyPath>Fertigstellung</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/HasDraftEntity">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/DraftEntityCreationDateTime">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/DraftEntityLastChangeDateTime">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/HasActiveEntity">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/IsActiveEntity">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/Bez30">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/PlantId">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/Edit_ac">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/Delete_mc">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/Update_mc">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType/MsgText">
+                <Annotation Term="UI.MultiLineText"/>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMessageType">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Details"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#details"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Nachricht"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#message"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Verwaltungsdaten"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#administration"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="administration">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LastChangedAt"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LastChangedBy"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CreatedAt"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CreatedBy"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="details">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ValidFrom"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ValidTo"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TourId"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="message">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="MsgTitel"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="MsgText"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Tournachricht"/>
+                        <PropertyValue Property="TypeNamePlural" String="Tournachrichten"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="headerTitle"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="headerDescription"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MsgTitel"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TourId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MsgText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ValidFrom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ValidTo"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedAt"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LastChangedBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LastChangedAt"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MsgTitel"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TourId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MsgText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ValidFrom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ValidTo"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedAt"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LastChangedBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LastChangedAt"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>TourId</PropertyPath>
+                        <PropertyPath>ValidFrom</PropertyPath>
+                        <PropertyPath>ValidTo</PropertyPath>
+                        <PropertyPath>CreatedBy</PropertyPath>
+                        <PropertyPath>CreatedAt</PropertyPath>
+                        <PropertyPath>LastChangedBy</PropertyPath>
+                        <PropertyPath>LastChangedAt</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMonitorCustomerType">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="NameOrg1"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Paletten"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Boxen"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Kunnden"/>
+                            <PropertyValue Property="Value" Path="NameOrg1"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Paletten"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Boxen"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Erledigt"/>
+                            <PropertyValue Property="Criticality" Path="Erledigt2"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember="UI.CriticalityRepresentationType/WithIcon"/>
+                            <PropertyValue Property="Value" Path="Erledigt"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>NameOrg1</PropertyPath>
+                        <PropertyPath>Paletten</PropertyPath>
+                        <PropertyPath>Boxen</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.TourMonitorMessageType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Nachrichten"/>
+                            <PropertyValue Property="Value" Path="MsgText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Versendet"/>
+                            <PropertyValue Property="Value" Path="CreatedAt"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Gelesen Datum"/>
+                            <PropertyValue Property="Value" Path="read_date"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Gelesen Seit"/>
+                            <PropertyValue Property="Value" Path="read_time"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Status"/>
+                            <PropertyValue Property="Criticality" Path="Status"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember="UI.CriticalityRepresentationType/WithIcon"/>
+                            <PropertyValue Property="Value" Path="StatusName"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.UserTourType/HasDraftEntity">
                 <Annotation Term="UI.HiddenFilter"/>
                 <Annotation Term="UI.Hidden"/>
@@ -741,10 +1081,10 @@
                             <PropertyValue Property="Value" Path="DeliveryDate"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="UserId"/>
+                            <PropertyValue Property="Value" Path="PlantId"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PlantId"/>
+                            <PropertyValue Property="Value" Path="UserId"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CreateUser"/>
@@ -792,10 +1132,13 @@
                     <Collection>
                         <PropertyPath>TourId</PropertyPath>
                         <PropertyPath>DeliveryDate</PropertyPath>
-                        <PropertyPath>UserId</PropertyPath>
                         <PropertyPath>PlantId</PropertyPath>
+                        <PropertyPath>UserId</PropertyPath>
                     </Collection>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.ZVI_VAA_DFVK_FV03_CUS_MSGType/BusinessPartnerName">
+                <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>

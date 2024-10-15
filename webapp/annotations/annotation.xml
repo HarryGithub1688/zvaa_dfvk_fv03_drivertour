@@ -46,8 +46,8 @@
 
             <!--/field properties end/-->
 
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.DriverTourType">
-                <!-- <Annotation Term="UI.FieldGroup" Qualifier="PERN">
+            <!--<Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.DriverTourType">
+                 <Annotation Term="UI.FieldGroup" Qualifier="PERN">
                     <Record Type="UI.FieldGroupType">
                         <PropertyValue Property="Data">
                             <Collection>
@@ -68,8 +68,8 @@
                             <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PERN"/>
                         </Record>
                     </Collection>
-                </Annotation> -->
-            </Annotations>
+                </Annotation> 
+            </Annotations>-->
 
         </Schema>
     </edmx:DataServices>
