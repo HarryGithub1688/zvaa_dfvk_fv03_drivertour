@@ -20,7 +20,8 @@ sap.ui.define([], function () {
 				} else {
 					var today = new Date();
 				}
-				var formatValue = today.toDateString().split(" ")[1] + " " + today.toDateString().split(" ")[2] + ", " + today.toDateString().split(" ")[3];
+				//var formatValue = today.toDateString().split(" ")[2] + " " + today.toDateString().split(" ")[1] + ". " + today.toDateString().split(" ")[3];
+				var formatValue = today.toLocaleDateString().replaceAll("/", ".");
 
 				listReportFilter.getControlByKey("DeliveryDate").setValue(formatValue);
 				setTimeout(function () {
