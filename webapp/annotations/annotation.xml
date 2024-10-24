@@ -13,63 +13,13 @@
 
             <!--/field properties start/-->
 
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.UserTourType/DeliveryDate">
+            <!-- <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.UserTourType/DeliveryDate">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
             </Annotations>
 
             <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.DriverTourType/PersNo">
                 <Annotation Term="Common.Label" String="{@i18n&gt;FVK-Nr}"/>
-                <!-- <Annotation Term="Common.FieldControl"/> -->
-            </Annotations>
-
-            <!-- 
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.DriverTourType/PersNo">
-
-                <Annotation Term="Common.Label" String="{@i18n&gt;FVK-Nr}"/>
-
-                <Annotation Term="com.sap.vocabularies.Common.v1.Text" Path="FullName">
-                    <Annotation Term="com.sap.vocabularies.UI.v1.TextArrangement" EnumMember="com.sap.vocabularies.UI.v1.TextArrangementType/TextLast"/>
-                </Annotation>
-
-            </Annotations>
-
-            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.ZVR_VAA_DFVK_DRIVERType/PersNo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-
-                <Annotation Term="Common.Label" String="{@i18n&gt;FVK-Nr}"/>
-
-                <Annotation Term="com.sap.vocabularies.Common.v1.Text" Path="FullName">
-                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast"/>
-                </Annotation>
-
-            </Annotations> 
-            -->
-
-            <!--/field properties end/-->
-
-            <!--<Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.DriverTourType">
-                 <Annotation Term="UI.FieldGroup" Qualifier="PERN">
-                    <Record Type="UI.FieldGroupType">
-                        <PropertyValue Property="Data">
-                            <Collection>
-                                <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="PersNo"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="Label" String="{@i18n>FVK-Nr}"/>
-                    </Record>
-                </Annotation>
-
-                <Annotation Term="UI.Facets">
-                    <Collection>
-                        <Record Type="UI.ReferenceFacet">
-                            <PropertyValue Property="Label" String="{@i18n>details}"/>
-                            <PropertyValue Property="ID" String="DetailsId"/>
-                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PERN"/>
-                        </Record>
-                    </Collection>
-                </Annotation> 
-            </Annotations>-->
+            </Annotations> -->
 
         </Schema>
     </edmx:DataServices>

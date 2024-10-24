@@ -10,7 +10,7 @@ sap.ui.define([], function () {
 		
 		onAfterRendering: function () {
             //cambios LFM// agregamos el nombre completo segun el modelo al campo PersNo al editarlo
-            this.customFilterObjectPagePersNo();
+            //this.customFilterObjectPagePersNo();
 		},
 
         //cambios LFM// agregamos el nombre completo segun el modelo al campo PersNo al editarlo -> replace the smartfield for custom input
@@ -134,122 +134,6 @@ sap.ui.define([], function () {
 	});
 });
 
-
 /*
-
-customFilterObjectPagePersNo1: function () {
-
-    var persNoField = this.getView().byId("UserTourIdentification::PersNo::Field");
-    persNoField.attachChange(function (evn) {
-        var oSource = evn.getSource();
-        var oValue = oSource.getValue();
-        var oModel = oSource.getModel();
-        var oPath = oSource.getBindingContext().sPath;
-        var valueFromModel = oModel.getProperty(oPath);
-        for (var i = 0; i < valueFromModel.PersNo.split("").length; i++) {
-            if (valueFromModel.PersNo.split("")[i] != "0") {
-                var persNo = valueFromModel.PersNo.slice(i); 
-                break;
-            }
-        };
-        var fullName = oModel.getProperty("/ZVR_VAA_DFVK_DRIVER('"+ persNo +"')").FullName;
-        var formatValue = '' + fullName + ' (' + persNo + ')';
-        this.globalVar = persNo;
-
-        if (fullName != undefined && fullName != "") {
-            setTimeout(function () {
-                oSource.setValue(formatValue);
-                oSource.getContent().setValue(formatValue);
-            }.bind(this), 500);
-            this.globalCheck = true;
-        } else {
-            this.globalCheck = false;
-        }
-
-    }.bind(this));
-
-    var saveBtn = this.getView().byId("save");
-        saveBtn.attachPress(function (evn) {
-
-            var oModel = evn.getSource().getModel();
-
-            oModel.attachRequestSent(function (evn) {
-                if (this.globalCheck === true) {
-                    var url = evn.mParameters.url.split("?sap")[0];
-                    evn.getSource().setProperty("/" + url + "/PersNo", this.globalVar);
-                }
-            }.bind(this));
-
-            oModel.attachRequestCompleted(function (evn) {
-                //check the data has change and ensure input format
-            }.bind(this));
-            
-    }.bind(this));
-}
-
-customFilterObjectPagePersNo2: function () {
-    var editBtn = this.getView().byId("edit");
-    editBtn.attachPress(function (evn) {
-        var changePersNoFormatFun = function () {
-            var persNoInput = this.getView().byId("UserTourIdentification::PersNo::Field-input");
-            persNoInput.attachChange(function (evn) {
-                var persNoField = this.getView().byId("UserTourIdentification::PersNo::Field");
-                var originalValue = persNoField.getValue();
-                this.globalVar = originalValue;
-                var fullName = persNoField.getModel().getProperty("/ZVR_VAA_DFVK_DRIVER('" + originalValue + "')/FullName");
-                if (fullName != undefined && fullName != "") {
-                    var newValue = '' + fullName + ' (' + originalValue + ')';
-                    persNoField.setValue(newValue);
-
-                    //check function every 0,5 seconds until find the request data
-                    var doThisWhenThisInfiniteLoopCheck = function () {
-                        if (persNoField.getValue() != newValue) {
-                            setTimeout(function () {
-                                persNoField.setValue(newValue);
-                                doThisWhenThisInfiniteLoopCheck();
-                            }.bind(this), 500);
-                        }
-                    }.bind(this);
-                    doThisWhenThisInfiniteLoopCheck();
-
-                    this.globalCheck = true;
-                } else {
-                    this.globalCheck = false;
-                }
-            }.bind(this));
-
-            var saveBtn = this.getView().byId("save");
-            saveBtn.attachPress(function (evn) {
-                if (this.globalCheck === true) {
-                    var oModel = evn.getSource().getModel();
-                    oModel.setProperty("/DriverTour(TourId='1101',DeliveryDate=datetime'2024-09-12T00%3A00%3A00')/PersNo", this.globalVar);
-
-                    oModel.attachRequestSent(function (evn) {
-                        if (this.globalCheck === true) {
-                            var persNoField = this.getView().byId("UserTourIdentification::PersNo::Field");
-                            var fullName = evn.getSource().getProperty("/ZVR_VAA_DFVK_DRIVER('" + this.globalVar + "')/FullName");
-                            var newValue = '' + fullName + ' (' + this.globalVar + ')';
-                            persNoField.setValue(newValue);
-                        }
-                    }.bind(this));
-                }
-            }.bind(this));
-        }.bind(this);
-
-        //check function every 0,5 seconds until find the requested data
-        var doThisWhenThisInfiniteLoopCheck = function () {
-            var persNoInput = this.getView().byId("UserTourIdentification::PersNo::Field-input");
-            if (persNoInput === undefined) {
-                setTimeout(function () {
-                    doThisWhenThisInfiniteLoopCheck();
-                }.bind(this), 500);
-            } else {
-                changePersNoFormatFun();
-            }
-        }.bind(this);
-        doThisWhenThisInfiniteLoopCheck();
-
-    }.bind(this));
-},
 
 */
