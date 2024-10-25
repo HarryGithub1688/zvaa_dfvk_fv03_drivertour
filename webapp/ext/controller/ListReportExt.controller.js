@@ -2,7 +2,7 @@ sap.ui.define([], function () {
 	return sap.ui.controller("hab.zvaadfvk00002.ext.controller.ListReportExt", {
 		
 		onInit: function () {
-			//this.newFilterDate();
+			this.newFilterDate();
 		},
 		
 		onAfterRendering: function () {
@@ -14,6 +14,7 @@ sap.ui.define([], function () {
 			
 			listReport.attachEventOnce("beforeRebindTable", function (evn) {
 				var dateFilter = this.getView().byId("listReportFilter-filterItemControl_BASIC-DeliveryDate");
+				dateFilter.setPlaceholder(" ");
 				if (new Date().getHours() > 19) {
 					var today = new Date();
 					today.setDate(new Date().getDate()+1);
