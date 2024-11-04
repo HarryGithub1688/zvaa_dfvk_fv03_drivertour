@@ -13,13 +13,13 @@
 
             <!--/field properties start/-->
 
-            <!-- <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.UserTourType/DeliveryDate">
+            <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.UserTourType/DeliveryDate">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
             </Annotations>
 
             <Annotations Target="cds_zsd_vaa_dfvk_ui_fv03.DriverTourType/PersNo">
                 <Annotation Term="Common.Label" String="{@i18n&gt;FVK-Nr}"/>
-            </Annotations> -->
+            </Annotations>
 
         </Schema>
     </edmx:DataServices>
