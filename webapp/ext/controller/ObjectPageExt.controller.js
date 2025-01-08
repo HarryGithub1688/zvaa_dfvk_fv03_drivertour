@@ -6,6 +6,11 @@ sap.ui.define([], function () {
         onInit: function () {
             //this.getView().byId("UserTourIdentification::PersNo::Field").setTextLabel(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("FVK-Nr"));
             this.getView().byId("UserTourIdentification::PersNo::GroupElement").setLabel(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("FVK-Nr"));
+        
+            //register on save event handler
+            this.getView().byId("save").attachPress(async function() { 
+                await this.onSaveEventHandler(); 
+            }.bind(this));
         },
 
         onAfterRendering: function () {
@@ -99,46 +104,66 @@ sap.ui.define([], function () {
                     }
                 }, 200);
                 checkPersNoInputLabel();
-
-                //get data
-                new Promise((resolve, reject) => {
-                    this.getView().getModel().read("/ZVR_VAA_DFVK_DRIVER", {
-                        success: (data) => {
-                            resolve(data);
-                        },
-                        error: (error) => {
-                            //console.log(error);
-                        }
-                    });
-                }).then((resolve) => {
-                    this.data = resolve;
-
-                    //on save changes
-                    this.getView().byId("save").attachPress((evn) => {
-                        var oForm = this.getView().byId("UserTourIdentification::Form");
-                        var persNoInput = this.getView().byId("UserTourIdentification::PersNo::Field-input");
-                        var customPersNoInput = sap.ui.getCore().getElementById("customPersNoInput");
-                        var deepPath = oForm.getBindingContext().sPath;
-                        var checkValue = true;
-                        for (var i = 0, l = this.data.results.length; i < l; i++) {
-                            var formatValue = this.data.results[i].FullName + " (" + this.data.results[i].PersNo + ")";
-                            //if value match -> set value
-                            if (customPersNoInput.getValue() === formatValue) {
-                                persNoInput.setValue(customPersNoInput.getValue());
-                                checkValue = false;
-                                break;
-                            }
-                        }
-                        //if doesnt match -> set empty
-                        if (checkValue) {
-                            persNoInput.setValue("");
-                            customPersNoInput.setValue("");
-                            this.getView().getModel().setProperty(deepPath + "/PersNo", "");
-                            this.getView().getModel().setProperty(deepPath + "/FullName", "");
-                        }
-                    });
-                });
             });
+        },
+     //On save changes event handler
+        onSaveEventHandler: async function () {
+            var oForm = this.getView().byId("UserTourIdentification::Form");
+            var persNoInput = this.getView().byId("UserTourIdentification::PersNo::Field-input");
+            var customPersNoInput = sap.ui.getCore().getElementById("customPersNoInput");
+            var deepPath = oForm.getBindingContext().sPath;
+            var oModel = this.getView().getModel();
+            
+            /*Check persNo input value (driver) -> check if an manually entered driver (persNo) exists in backend
+              check shoud be applied only for a values entered manually, and not applied to value selected
+              via value help*/
+    
+            //stop PersNo check processing if there is no PersNo entered
+            if(!customPersNoInput.getValue()) return;
+
+            //get driver input string value
+            var persNo = customPersNoInput.getValue();
+
+            //stop PersNo check processing if PersNo is empty... 
+            if(!persNo ) return;
+
+            //...or equal 0
+            if(!Number(persNo)) return;
+
+            /*if the value has been selected via value help, no check required
+            -> manual value input pass only a pers number (e.g. "1234")
+            -> value input via value help selection pass a value in the following 
+               string format 'first_name last_name (persNo)' - e.g. 'Max Mustermann (1234)'*/
+            if(isNaN(Number(persNo))) return;
+
+            //read driver odata resonse status code to check if persNo exists in backend
+            const driverStatusCode = await this.getDriverStatusCode(oModel, persNo);
+            
+            //driver has not been found
+            if(driverStatusCode !== "200"){
+                persNoInput.setValue("");
+                customPersNoInput.setValue("");
+                oModel.setProperty(deepPath + "/PersNo", "");
+                oModel.setProperty(deepPath + "/FullName", "");
+            }
+        },
+
+        //OData call to read a driver based on persNo, and returns reponse code
+        getDriverStatusCode: async function (oModel, persNo) {
+            return new Promise((resolve, reject) => {
+                var oParameters = {
+                    PersNo: persNo
+                }
+                var sDriverPathKey = oModel.createKey("/ZVR_VAA_DFVK_DRIVER", oParameters);
+                oModel.read(sDriverPathKey, {
+                    success: (data, response) => {
+                        resolve(response.statusCode);
+                    },
+                    error: (error) => {
+                        resolve(error.statusCode);
+                    }
+                });
+            })
         }
 
     });
