@@ -119,7 +119,13 @@ sap.ui.define([], function () {
               via value help*/
     
             //stop PersNo check processing if there is no PersNo entered
-            if(!customPersNoInput.getValue()) return;
+            if(!customPersNoInput.getValue()) {
+                //clear persNo Input field
+                persNoInput.setValue("");
+                oModel.setProperty(deepPath + "/PersNo", "");
+                oModel.setProperty(deepPath + "/FullName", "");
+                return;
+            }
 
             //get driver input string value
             var persNo = customPersNoInput.getValue();
