@@ -3,6 +3,7 @@ sap.ui.define([], function () {
 		
 		onInit: function () {
 			this.newFilterDate();
+			this.getOwnerComponent().getModel().setSizeLimit(1000);
 		},
 		
 		onAfterRendering: function () {
