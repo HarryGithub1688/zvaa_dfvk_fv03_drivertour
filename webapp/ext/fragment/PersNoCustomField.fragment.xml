@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
-	<Input id="customPersNoInput" placeholder="" width="100%" showSuggestion="true" showValueHelp="true" suggestionRows="{/ZVR_VAA_DFVK_DRIVER}">
+	<Input id="customPersNoInput" placeholder="" width="100%" showSuggestion="true" showValueHelp="true" suggestionRows="{/ZVC_VAA_DFVK_FV03_DRIVER}">
 			<suggestionColumns width="30cm">
 				<Column>
 					<Label text="PersNo"/>

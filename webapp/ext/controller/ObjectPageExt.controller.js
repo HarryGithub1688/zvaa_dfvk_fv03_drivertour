@@ -160,7 +160,7 @@ sap.ui.define([], function () {
                 var oParameters = {
                     PersNo: persNo
                 }
-                var sDriverPathKey = oModel.createKey("/ZVR_VAA_DFVK_DRIVER", oParameters);
+                var sDriverPathKey = oModel.createKey("/ZVC_VAA_DFVK_FV03_DRIVER", oParameters);
                 oModel.read(sDriverPathKey, {
                     success: (data, response) => {
                         resolve(response.statusCode);
